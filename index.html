@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Facts</title>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+        }
+
+        .interactionText {
+            cursor: pointer;
+            
+        }
+
+        .fact {
+            max-width: 80%;
+        }
+
+        .keyButton {
+            padding: 8px;
+            border: 1px solid rgb(188, 188, 188);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="fact" id="fact"></h1>
+        <p class="interactionText" onClick="showFact()">Press <span class="keyButton">space</span> or click me!</p>
+    </div>
+
+    <script>
+        const state = {
+            facts: [],
+        };
+
+        async function getFacts() {
+            const SITE_URL = 'https://dog-api.kinduff.com/api/facts?number=5';
+            try {
+                const response = await fetch(SITE_URL);
+                const jsonResponse = await response.json();
+                state.facts = jsonResponse.facts;
+            } catch (error) {
+                console.log(error);
+            };
+        }
+
+        async function showFact() {
+            if (state.facts.length <= 0) {
+                document.getElementById('fact').innerHTML = '...';
+                await getFacts();
+            }
+
+            document.getElementById('fact').innerHTML = state.facts.pop();
+        }
+        
+        showFact();
+
+        document.addEventListener('keyup', (e) => {
+            if (e.code === "Space") showFact();
+        });
+    </script>
+</body>
+</html>
