@@ -23,7 +23,7 @@ A simple project made with pure HTML, CSS and JS code.
 
 # Live URL
 
-https://dogfacts.vercel.app/
+https://dogfacts.vercel.app
 
 If you have "undefined" problems with CORS, I recommend to use this Chrome extension (Allow CORS):
 https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
